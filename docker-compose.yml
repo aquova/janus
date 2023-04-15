@@ -1,0 +1,7 @@
+version: '3'
+services:
+  janus:
+    image: janus:latest
+    restart: unless-stopped
+    volumes:
+      - ./src:/janus
