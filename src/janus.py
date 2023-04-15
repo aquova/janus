@@ -21,7 +21,10 @@ class DiscordClient(discord.Client):
         await self.tree.sync(guild=guild)
 
 def calculate_timestamps(date: str, time: str, tz: str) -> str:
-    tz_offset = tz[3:].zfill(3)
+    if tz.upper() == "UTC":
+        tz_offset = "+0000"
+    else:
+        tz_offset = tz[3:].zfill(3)
     combined_time = f"{date} {time} {tz_offset}00"
     desired = datetime.strptime(combined_time, "%Y/%m/%d %H:%M %z")
     epoch = datetime(1970, 1, 1, 0, 0, 0, tzinfo=timezone.utc)
